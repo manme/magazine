@@ -1,0 +1,17 @@
+h1 New Article
+
+= form_for @article do |f|
+  .field
+    = f.label :title
+    br
+    = f.text_field :title
+  .field
+    = f.label :content
+    br
+    = f.text_area :content
+  .field
+    = f.label 'tags (split by comma ",")'
+    br
+    = f.text_field :tag_list, value: f.object.tag_list.to_s
+  .field
+    = f.submit

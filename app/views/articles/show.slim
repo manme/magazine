@@ -1,0 +1,6 @@
+h2
+  = @article.title
+p
+  = @article.content
+hr
+= render partial: 'tags', locals: { tags: @article.tag_list }
