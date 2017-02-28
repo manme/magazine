@@ -40,8 +40,6 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (4.0.0)
       activerecord (>= 4.0)
-    acts_as_tree (2.6.1)
-      activerecord (>= 3.0.0)
     annotate (2.7.1)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 12.0)
@@ -108,15 +106,12 @@ GEM
     lumberjack (1.0.11)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
-    metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
-    mocha (1.2.1)
-      metaclass (~> 0.0.1)
     multi_json (1.12.1)
     nenv (0.3.0)
     nio4r (1.2.1)
@@ -183,9 +178,6 @@ GEM
       rspec-expectations (~> 3.5.0)
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
-    rspec-rails-mocha (0.3.2)
-      mocha (>= 0.9.8)
-      rspec-rails (>= 2.0.0)
     rspec-support (3.5.0)
     ruby_dep (1.5.0)
     sass (3.4.23)
@@ -229,7 +221,6 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  acts_as_tree
   annotate
   coffee-rails (~> 4.1.0)
   devise
@@ -241,7 +232,6 @@ DEPENDENCIES
   pg
   rails (= 5.0.1)
   rspec-rails (>= 3.1.0)
-  rspec-rails-mocha (~> 0.3.1)
   sass-rails (~> 5.0)
   slim
   turbolinks

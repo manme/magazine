@@ -3,4 +3,4 @@ h2
 p
   = @article.content
 hr
-= render partial: 'tags', locals: { tags: @article.tag_list }
+= render partial: 'tags', locals: { article: @article }

@@ -11,6 +11,8 @@
 #
 
 class Article < ApplicationRecord
+  acts_as_taggable
+  include Subtagable
 
   validates :title, presence: true
   validates :content, presence: true
@@ -19,5 +21,28 @@ class Article < ApplicationRecord
   scope :search_content, ->(search) { where("content LIKE ?", "%#{search}%")}
   scope :search, ->(search) { search_title(search).or(search_content(search)) }
 
-  acts_as_taggable
+  def self.search_in_tags(tag_name)
+    article_ids = []
+
+    # finding subtags
+    ActsAsTaggableOn::Tagging.tagged_with(tag_name).each do |tagging|
+      article_ids << tagging.taggable_id if tagging.taggable_type == Article.name
+    end
+
+    # finding tags
+    Article.tagged_with(tag_name).each do |article|
+      article_ids << article.id
+    end
+
+    article_ids
+  end
+
+  def all_tags
+    taggings.map do |tagging|
+      str = tagging.tag.name
+      subtags = tagging.taggings.map { |sub_tagging| sub_tagging.tag.name }
+      str << ' (' << subtags.join(', ') << ' )' if subtags.any?
+      str
+    end.join(', ')
+  end
 end

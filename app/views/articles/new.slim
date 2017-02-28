@@ -10,7 +10,7 @@ h1 New Article
     br
     = f.text_area :content
   .field
-    = f.label 'tags (split by comma ",")'
+    = f.label 'tags: split by comma "tag 1, tag2" and add subtags by brackets: "tag1 (stag1, stag2)" '
     br
     = f.text_field :tag_list, value: f.object.tag_list.to_s
   .field

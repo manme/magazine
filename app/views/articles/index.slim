@@ -16,7 +16,7 @@ br
       = link_to article.title, article_path(article)
     = simple_format article.content
     p
-      = render partial: 'tags', locals: { tags: article.tag_list }
+      = render partial: 'tags', locals: { article: article }
     hr
 p
   = link_to 'New Article', new_article_path
