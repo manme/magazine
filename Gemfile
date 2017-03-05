@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'slim'
 gem 'acts-as-taggable-on'
+gem 'pg_search'
 
 group :development, :test do
   gem 'rspec-rails', '>= 3.1.0'

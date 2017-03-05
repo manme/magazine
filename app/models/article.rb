@@ -11,27 +11,30 @@
 #
 
 class Article < ApplicationRecord
+  include PgSearch
+
   acts_as_taggable
   include Subtagable
 
   validates :title, presence: true
   validates :content, presence: true
 
-  scope :search_title, ->(search) { where("title LIKE ?", "%#{search}%")}
-  scope :search_content, ->(search) { where("content LIKE ?", "%#{search}%")}
-  scope :search, ->(search) { search_title(search).or(search_content(search)) }
+  belongs_to :user
+
+  pg_search_scope :search_for, against: %i(title content)
 
   def self.search_in_tags(tag_name)
     article_ids = []
 
     # finding subtags
-    ActsAsTaggableOn::Tagging.tagged_with(tag_name).each do |tagging|
-      article_ids << tagging.taggable_id if tagging.taggable_type == Article.name
+    subtags = ActsAsTaggableOn::Tagging.tagged_with(tag_name)
+    subtags.pluck(:taggable_id, :taggable_type).each do |taggable_id, taggable_type|
+      article_ids << taggable_id if taggable_type == Article.name
     end
 
     # finding tags
-    Article.tagged_with(tag_name).each do |article|
-      article_ids << article.id
+    Article.tagged_with(tag_name).pluck(:id).each do |article_id|
+      article_ids << article_id
     end
 
     article_ids

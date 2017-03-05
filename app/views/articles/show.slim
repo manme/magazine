@@ -2,5 +2,9 @@ h2
   = @article.title
 p
   = @article.content
+br
+  i
+    | Author:
+    =< @article.user.name
 hr
 = render partial: 'tags', locals: { article: @article }

@@ -1,8 +1,8 @@
 class ArticlesController < UserController
   def index
-    @articles = Article.order(created_at: :desc).includes(taggings: [:tag, taggings: [:tag]])
+    @articles = Article.order(created_at: :desc).includes(:user, taggings: [:tag, taggings: [:tag]])
 
-    @articles = @articles.search(params[:search]) if params[:search].present?
+    @articles = @articles.search_for(params[:search]) if params[:search].present?
     @articles = @articles.to_a
 
     if params[:tag].present?
@@ -20,7 +20,7 @@ class ArticlesController < UserController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
     if @article.save
       @article.tag_list.add(tag_params[:tag_list],  parser: SubtagParser)
       @article.save

@@ -15,6 +15,10 @@ br
     h2
       = link_to article.title, article_path(article)
     = simple_format article.content
+    br
+    i
+      | Author:
+      =< article.user.name
     p
       = render partial: 'tags', locals: { article: article }
     hr
